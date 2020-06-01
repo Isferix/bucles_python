@@ -32,22 +32,31 @@ def ej1():
     Realizar un bucle "for" que recorra esa secuencia armada con "range"
     y cuante cuantes números ingresados hay y la sumatoria de todos los números
     Tener en cuenta que "range" no incluye el número de "fin" en su secuencia,
-    sino que va hasta el anterior
+    sino que va hasta el anterior   
     '''
 
     # inicio = ....
     # fin = ....
-
+    inicio = int(input('Ingrese el primero número de la secuencia\n'))
+    fin = int(input('Ingrese el segundo numero de la secuencia\n'))    
     # cantidad_numeros ....
     # sumatoria ....
-
+    sumatoria = 0
+    cantidad_numeros = 0
     # bucle.....
-
+    for numero in range(inicio, (fin + 1)):
+        sumatoria += numero
+        cantidad_numeros += 1
     # Al terminar el bucle calcular el promedio como:
     # promedio = sumatoria / cantidad_numeros
-
+    promedio = sumatoria / cantidad_numeros
     # Imprimir resultado en pantalla
-
+    print(
+        "El resultado de la secuencia es:           {}\n"
+        "El total de numeros en la secuencias es:   {}\n"
+        "El promedio de sumar toda la secuencia es: {}\n"
+        .format(sumatoria, cantidad_numeros, promedio)
+    )
 
 def ej2():
     print("Mi Calculadora (^_^)")
@@ -62,7 +71,39 @@ def ej2():
     Se debe debe imprimir un cartel de error si el operador ingresado no es
     alguno de lo soportados o no es la palabra "FIN"
     '''
+    while True:   
+        operacion = str(input("Ingrese la operacion a realizar: "))  
+        if operacion != "+" and "-" and "*" and "/" and "**":
+            print("Por favor, introduzca una operacion valida")
+            continue 
+        numero_1 = int(input("Ingrese el primer numero a operar: "))
+        numero_2 = int(input("Ingrese el segundo numero a operar: "))
 
+        if operacion == "+":
+            resultado = numero_1 + numero_2
+            print("El resultado de sumar {} y {} es {}".format(numero_1, numero_2, resultado))
+
+        elif operacion == "-":
+            resultado = numero_1 - numero_2
+            print("El resultado de restar {} y {} es {}".format(numero_1, numero_2, resultado))
+
+        elif operacion == "*":
+            resultado = numero_1 * numero_2
+            print("El resultado de multiplicar {} y {} es {}".format(numero_1, numero_2, resultado))
+
+        elif operacion == "/":
+            resultado = numero_1 / numero_2
+            print("El resultado de dividir {} y {} es {}".format(numero_1, numero_2, resultado))
+
+        elif operacion == "**":
+            resultado = numero_1 ** numero_2
+            print("El resultado de elevar {} y {} es {}".format(numero_1, numero_2, resultado))
+
+        continuar = input("¿Desea continuar?\nEscribe SI para continuar | Escribe NO para terminar\n")
+        if continuar == "SI":
+            continue
+        else:
+            break
 
 def ej3():
     print("Mi organizador académico (#_#)")
@@ -89,21 +130,37 @@ def ej3():
     # Para calcular el promedio primero debe obtener la suma
     # de todas las notas, que irá almacenando en esta variable
     sumatoria = 0           # Ya le hemos inicializado en 0
-
     cantidad_notas = 0      # Aquí debe contar cuantas notas válidas encontró
     cantidad_ausentes = 0   # Aquí debe contar cuantos ausentes hubo
-
     # Realice aquí el bucle para recorrer todas las notas
     # y cacular la sumatoria
-
+    for nota in notas:
+        if nota >= 0:
+            sumatoria += nota / len(notas)
+            cantidad_notas += 1
+        else:
+            cantidad_ausentes += 1
+    print(sumatoria)
     # Terminado el bucle calcule el promedio como
     # promedio = sumatoria / cantidad_notas
-
     # Utilice la nota promedio calculada y transformela
     # a calificación con letras, imprima en pantalla el resultado
-
+    if sumatoria >= 90:
+        sumatoria = "A"
+    elif sumatoria >= 80:
+        sumatoria = "B"
+    elif sumatoria >= 70:
+        sumatoria = "C"
+    elif sumatoria >= 60:
+        sumatoria = "D"  
+    else:
+        sumatoria = "F"
     # Imprima en pantalla al cantidad de ausentes
-
+    print(
+        "El promedio del alumno es de :            {}\n"
+        "La cantidad de notas validas fue de:      {}\n"
+        "La cantidad de ausentes fue de:           {}"
+        .format(sumatoria, cantidad_notas, cantidad_ausentes))     
 
 def ej4():
     print("Mi primer pasito en data analytics")
@@ -137,23 +194,38 @@ def ej4():
     temperatura_min = None      # Aquí debe ir almacenando la temp mínima
     temperatura_sumatoria = 0   # Aquí debe ir almacenando la suma de todas las temp
     temperatura_promedio = 0    # Al finalizar el loop deberá aquí alamcenar el promedio
-    temperatura_len = 0         # Aquí debe almacenar cuantas temperatuas hay en la lista
+    temperatura_len = len(temp_dataloger)         # Aquí debe almacenar cuantas temperatuas hay en la lista
 
     # Colocar el bucle aqui......
+    for temperatura in temp_dataloger:
+      temperatura_promedio += temperatura / temperatura_len
+      temperatura_sumatoria += temperatura
+      if (temperatura_max is None) or (temperatura > temperatura_max):
+        temperatura_max = temperatura   
+      if (temperatura_min is None) or (temperatura < temperatura_min):
+        temperatura_min = temperatura   
 
+    print(
+        "La temperatura mas alta registra es de:     {}\n"
+        "La temperatura mas baja registrada es de:   {}\n"
+        "El promedio de las temperaturas es de:      {}"
+        .format(temperatura_max, temperatura_min, temperatura_promedio))
     # Al finalizar el bucle compare si el valor que usted calculó para
     # temperatura_max y temperatura_min coincide con el que podría calcular
     # usando la función "max" y la función "min" de python
     # función "max" --> https://www.w3schools.com/python/ref_func_max.asp
     # función "min" --> https://www.w3schools.com/python/ref_func_min.asp
-
+    if max(temp_dataloger) == temperatura_max:
+        print("Temperatura Max, y la funcion Max llegaron al mismo resultado")
+    if min(temp_dataloger) == temperatura_min:
+        print("Temperatura Min, y la funcion Min llegaron al mismo resultado")
     # Al finalizar el bucle debe calcular el promedio como:
     # temperatura_promedio = temperatura_sumatoria / cantidad_temperatuas
-
     # Corroboren los resultados de temperatura_sumatoria
     # usando la función "sum"
     # función "sum" --> https://www.w3schools.com/python/ref_func_sum.asp
-
+    if sum(temp_dataloger) == temperatura_sumatoria:
+        print("Temperatura Sumatoria, y la funcion Sum llegaron al mismo resultado")
     '''
     Una vez que tengamos nuestros valores correctamente calculados debemos
     determinar en que epoca del año nos encontramos en Buenos Aires utilizando
@@ -168,13 +240,30 @@ def ej4():
     Referencia:
     https://es.weatherspark.com/y/28981/Clima-promedio-en-Buenos-Aires-Argentina-durante-todo-el-a%C3%B1o
     '''
-
     # En base a los rangos de temperatura de cada estación,
     # ¿En qué época del año nos encontramos?
     # Imprima el resultado en pantalla
     # Debe utilizar temperatura_max y temperatura_min para definirlo
+    verano = (19 + 28) / 2
+    otoño = (11 + 24) / 2
+    invierno = (8 + 14) / 2
+    primavera = (10 + 24) / 2
+    Temperaturas_Referencia = [verano, otoño, invierno, primavera]
+    diccionario = {verano : "verano", otoño : "otoño", invierno : "invierno", primavera : "primavera"}
+    temperatura_rango_promedio = (temperatura_max + temperatura_min) / 2
+    distancia = [0, 0]
+    distancia_anterior = [999, 999]
+    
+    for temperatura in Temperaturas_Referencia:
+        distancia = [temperatura, abs(temperatura - temperatura_rango_promedio)]
+        if distancia_anterior[1] < distancia[1]:
+            distancia = distancia_anterior
+        else:
+            distancia_anterior = distancia
 
-
+    epoca = diccionario.get(distancia[0])
+    print("La temperatura promedio se asemeja a la epoca de", epoca)
+        
 def ej5():
     print("Ahora sí! buena suerte :)")
 
@@ -235,6 +324,63 @@ def ej5():
        recorre la lista de palabras y busca la mayor según el motivo ingresado ("1" o "2")
 
   '''
+    while True:
+        lista = []
+        
+        cantidad = int(input("Escriba la cantidad de palabras a ingresar: "))
+
+        for i in range(cantidad):
+            lista.append(str(input("Ingrese la palabra a comparar: ")))
+
+        operacion = str(input("Ingrese la operacion a realizar: "))
+
+        if operacion == "1":
+            lista_comparada = []
+            lista_backup = lista
+            for i in range(len(lista)):
+                palabra_mayor = ""
+                for palabra in lista_backup:
+                    if palabra > palabra_mayor:
+                        palabra_mayor = palabra
+                lista_comparada.append(palabra_mayor)
+                lista_backup.remove(palabra_mayor)
+
+            print("En orden alfabetico aparecen:")
+            for palabra in lista_comparada:
+                print(palabra)
+        
+        elif operacion == "2":
+            lista_comparada = []
+            lista_backup = lista
+            for i in range(len(lista)):
+                palabra_mayor = ""
+                for palabra in lista_backup:
+                    if len(palabra) > len(palabra_mayor):
+                        palabra_mayor = palabra
+                lista_comparada.append(palabra_mayor)    
+                lista_backup.remove(palabra_mayor)
+
+            print("En orden alfabetico aparecen:")
+            for palabra in lista_comparada:
+                print(palabra)
+
+        else:
+            print("La operacion ingresada es desconocida, por favor empieze de vuelta")
+            continue
+
+        print(
+            "¿Desea continuar?\n"
+            "Escribe SI para continuar \t|\t Escribe NO para terminar")
+        continuar = input()
+        
+        if continuar == "SI":
+            continue
+        elif continuar == "NO":
+            print("Finalizando programa...")
+            break
+        else:
+            print("No ha respondido como se le ha pedido, reinicializando programa...")
+            continue
 
 
 if __name__ == '__main__':
